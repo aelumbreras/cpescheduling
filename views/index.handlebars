@@ -1,0 +1,208 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CpE Room Scheduling System</title>
+
+  <link rel="stylesheet" type="text/css" media="screen" href="/bootstrap-select/css/bootstrap-select.min.css">
+  <link rel='stylesheet' href='/css/viewer.css' />
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/admin-css.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="main" class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+          Menu
+          <span class="caret"></span>
+        </button>
+        <ul id="menuDropdown" class="dropdown-menu pull-right" role="menu">
+          <li><a href="/viewer">Go To Viewer</a>
+          </li>
+          <li><a href="#" data-toggle="modal" data-target="#accountModal">Change Password</a>
+          </li>
+          <li><a href="/users/logout">Log Out</a>
+          </li>
+        </ul>
+      </div>
+        <h1 class="panel-title text-center text-uppercase">
+          CpE Room Schedule System <b>(Admin)</b></h1>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <h3 id="clock" class="text-center well well-sm center-block">Loading...</h3>
+        </div>
+        {{#if user}}
+        <div id="users">
+          <div id="search-container" class="row">
+            <div class="col-xs-3">
+              <input class="search form-control col-xs-4 input-sm" placeholder="Search Table..." />
+            </div>
+            <div class="col-xs-offset-4 col-xs-5 text-right">
+              <button id="btnAdd" type="button" class="crudBtn btn btn-success btn-sm" data-toggle="modal" data-target="#schedModal">Add</button>
+              <button disabled id="btnEdit" type="button" class="crudBtn btn btn-warning btn-sm" data-toggle="modal" data-target="#schedModal">Edit</button>
+              <button disabled id="btnDelete" type="button" class="crudBtn btn btn-danger btn-sm" data-toggle="modal" data-target="#schedModal">Delete</button>
+            </div>
+          </div>
+
+          <div id="table-container">
+            <table class="table table-scroll">
+              <thead class="table">
+                <th class="sort col-xs-3" data-sort="roomtag">Room<span></span></th>
+                <th class="sort col-xs-3" data-sort="schedule">Schedule<span></span></th>
+                <th class="sort col-xs-3" data-sort="occupant">Occupant<span></span></th>
+                <th class="sort col-xs-3" data-sort="professor">Professor<span></span></th>
+              </thead>
+              <tbody class="list">
+              </tbody>
+            </table>
+          </div>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+
+  <div id="schedModal" class="modal fade" role="dialog"> <!-- CUD Modal -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Schedule</h4>
+        </div>
+        <form action="/insert" method="post" class="form-horizontal">
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="inputRoom" class="col-xs-2 control-label">Room</label>
+              <div class="col-xs-8">
+                <select name="roomtag" data-live-search="true" data-size="4" class="form-control selectpicker input-sm" id="inputRoom">
+                  <option>300</option>
+                  <option>316</option>
+                  <option>315</option>
+                  <option>314</option>
+                  <option>313</option>
+                  <option>312</option>
+                  <option>311</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputDay" class="col-xs-2 control-label">Day</label>
+              <div class="col-xs-8">
+                <select name="day" class="form-control selectpicker input-sm" id="inputDay">
+                  <option>Mon</option>
+                  <option>Tue</option>
+                  <option>Wed</option>
+                  <option>Thu</option>
+                  <option>Fri</option>
+                  <option>Sat</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputStartTime" class="col-xs-2 control-label">Start Time</label>
+              <div class="col-xs-3">
+                <select name="start" data-live-search="true" data-size="6" class="form-control input-sm" id="inputStartTime">
+                </select>
+              </div>
+              <label for="inputEndTime" class="col-xs-2 control-label">End Time</label>
+              <div class="col-xs-3">
+                <select name="end" data-live-search="true" data-size="6" class="form-control input-sm" id="inputEndTime">
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-xs-2 control-label">Occupant</label>
+              <label for="inputYear" class="col-xs-1 control-label">Year</label>
+              <div class="col-xs-2">
+                <select name="year" class="form-control selectpicker input-sm" id="inputYear">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+                <!--<p></p><input type="number" class="form-control input-sm" id="inputYear" min="1" max="5" value="1">-->
+              </div>
+              <label for="inputSection" class="col-xs-2 control-label">Section</label>
+              <div class="col-xs-2">
+                <select name="section" class="form-control selectpicker input-sm" id="inputSection">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputProf" class="col-xs-2 control-label">Professor</label>
+              <div class="col-xs-8">
+                <select name="professor" data-live-search="true" data-size="4" class="form-control selectpicker input-sm" id="inputProf">
+                  <option>Prof. A</option>
+                  <option>Prof. B</option>
+                  <option>Prof. C</option>
+                  <option>Prof. D</option>
+                  <option>Prof. E</option>
+                  <option>Prof. F</option>
+                </select>
+              </div>
+            </div>
+            <input type="text" id="idHolder" name="id" hidden>
+          </div>
+          <div class="modal-footer">
+            <span class="badge"></span>
+            <button id="submit" type="submit" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="accountLabel">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="accountLabel">Change Password</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/users/changepass" method="post">
+            <div class="form-group">
+              <label for="password">New Password</label>
+              <input name="password" type="password" class="form-control input-sm" id="changePW" required>
+            </div>
+            <div class="form-group">
+              <label for="password2">Confirm Password</label>
+              <input name="password2" type="password" class="form-control input-sm" id="changePW2" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-xs" id="save-submit">Change</button> <span class="badge"></span>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script src="/jquery/jquery.min.js"></script>
+<script>
+  var servToClient = {{{scheduleString}}};
+</script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/moment/moment.min.js"></script>
+<script src="/js/adminsched.js"></script>
+<script src="/listjs/list.min.js"></script>
+<script src="/bootstrap-select/js/bootstrap-select.js"></script>
+<script src="/js/data.js"></script>
+<script src="/js/admin-data.js"></script>

@@ -1,0 +1,44 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>CpE Room Schedule System</title>
+
+  <link rel='stylesheet' href='/css/viewer.css' />
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <div id="main" class="container-fluid">
+    <div class="panel panel-default panel-primary">
+      <div class="panel-heading text-center">
+        <a href="/">
+          <button id="returnBtn" type="button" class="btn btn-default btn-xs pull-right">
+            Return
+          </button>
+        </a>
+          <h1 class="panel-title text-uppercase">
+            CpE Room Schedule System</h1>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <h3 id="clock" class="text-center well well-sm center-block">Loading...</h3>
+            </div>
+            <div id="rooms-container">
+              <h1 class="text-center"></h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+
+    <script src="/jquery/jquery.min.js"></script>
+    <script>
+    var servToClient = {{{scheduleString}}};
+    </script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/moment/moment.min.js"></script>
+    <script src="/js/roomsched.js"></script>
+    <script src="/js/data.js"></script>

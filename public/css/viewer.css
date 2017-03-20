@@ -1,0 +1,61 @@
+#main {
+  margin:0!important;
+  padding:0!important;
+}
+
+html, body, #main>.panel{
+	background: #c1bdba;
+}
+
+
+#main>.panel>.panel-heading {
+	background-color: #FF5722!important;
+	border-color:  black;
+  padding: 10px 10px 15px;
+}
+
+#main>.panel {
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  margin-bottom: 0;
+  position: absolute;
+  width: auto;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  --webkit-box-shadow: none;
+  border-radius: none;
+}
+.room-stat {
+  color: white;
+  height: 35vmin;
+  min-height: 150px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3)!important;
+  background: rgba(19, 35, 47, 0.6)!important;
+}
+.room-stat p {
+  font-size: 12px;
+  font-size: 2.4vmin;
+}
+#time-now {
+  margin-bottom:20px;
+}
+#clock {
+	width: 40vw;
+	min-width: 400px;
+}
+.panel-vacant {
+	background: #FF5722;
+	color: white;
+}
+.panel-occupied {
+	background: rgba(19, 35, 47, 0.6);
+	color: white;
+}
+
+#returnBtn {
+	background: rgba(19, 35, 47, 1);
+  	color: white;
+}
